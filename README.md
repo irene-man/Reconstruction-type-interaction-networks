@@ -15,7 +15,7 @@ Python code for simulating the equilibrium of infection disease dynamics of mult
 `equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`: These scripts simulate the equilibrium of multi-type dynamical systems corresponding to the inputted generated parameter set, using `infection_state.py`, and either `ode_model.py` or `ode_model_assortative.py`. 
 
 ### Authors
-Irene Man<sup>1,2</sup>, Elisa Beninca<sup>1</sup>, Mirjam E. Kretzschmar<sup>2</sup>, Johannes A. Bogaards<sup>1,3</sup>
+Irene Man<sup>1,2</sup>, Elisa Benincà<sup>1</sup>, Mirjam E. Kretzschmar<sup>2</sup>, Johannes A. Bogaards<sup>1,3</sup>
 <table>
   <tr>
     <td>1</th>
