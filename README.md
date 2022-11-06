@@ -1,18 +1,25 @@
 # Reconstruction-type-interaction-networks
 
 ### Brief description
-Python code for simulating the equilibrium of infection disease dynamics of multi-type pathogens and, subsequently, sampling random cross-sectional datasets from the equilibrium. The code is used to compute the performance of statistical network inference models in reconstructing pathogen type interaction networks from co-occurrence data proposed in "Reconstructing heterogeneous pathogen interactions from co-occurrence data via statistical network inference", *bioRXiv, 2021 (doi: 10.1101/2021.11.15.468692)*.
+Python code for simulating the equilibrium of infection disease dynamics of multi-type pathogens and, subsequently, sampling random cross-sectional datasets from the equilibrium and R code to infer type interaction networks. These codes were used to compute the performance of statistical network inference models in reconstructing pathogen type interaction networks from co-occurrence data proposed in "Reconstructing heterogeneous pathogen interactions from co-occurrence data via statistical network inference", *bioRXiv, 2021 (doi: 10.1101/2021.11.15.468692)*.
 
-### Prerequisites
+### Python prerequisites 
 - numpy
 - scipy
 - pandas
 - matplotlib
 
+### R prerequisites
+- IsingFit
+- IsingSampler
+- boot
+
 ### Use
 `parameter_sets_generation.py`: This script generates random parameter sets used by `equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`. 
 
-`equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`: These scripts simulate the equilibrium of multi-type dynamical systems corresponding to the inputted generated parameter set, using `infection_state.py`, and either `ode_model.py` or `ode_model_assortative.py`. 
+`equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`: These scripts simulate the equilibrium of multi-type dynamical systems corresponding to the inputted generated parameter set, using `infection_state.py`, and either `ode_model.py` or `ode_model_assortative.py`.
+
+`validation_inference_performance.R`: This script validates the performance of statistical network inference.
 
 ### Authors
 Irene Man<sup>*,1,2</sup>, Elisa Benincà<sup>1</sup>, Mirjam E. Kretzschmar<sup>2</sup>, Johannes A. Bogaards<sup>1,3</sup>
