@@ -2,9 +2,15 @@
 library("IsingFit")
 library("IsingSampler")
 
+# Graphical model estimation using selection via gRim
+library(gRbase)
+library(gRain)
+library(gRim)
+
 n.models <- 100
 sampsize <- "100000"
-estimates <- array(NA, dim=c(n.models,10))
+estimates.ising <- array(NA, dim=c(n.models,10))
+estimates.graphical <- array(NA, dim=c(n.models,10))
 
 for (i in 1:n.models) {
   
@@ -14,11 +20,51 @@ for (i in 1:n.models) {
     # regularized Ising network estimation
     m1 <- IsingFit(as.matrix(df), AND=TRUE, progressbar=FALSE, plot=FALSE)
     m1$weiadj <- m1$weiadj[1:5,1:5]
-    estimates[i,] <- m1$weiadj[lower.tri(m1$weiadj)]
+    estimates.ising[i,] <- m1$weiadj[lower.tri(m1$weiadj)]
+
+    # graphical models network estimation 
+    m_s <- dmod(~ .^., data=co.df)
+
+    # backward selection via AIC
+    m_est <- stepwise(m_s, direction="backward", criterion="aic",
+     k=2, steps=10000, details=1)
+
+    m_est.weiadj <- array(0, dim=c(6,6))
+
+    for (j in 1:length(m_est$glist)) {
+      clique <- m_est$glistNUM[[j]]
+      if (length(clique) > 1) {
+        for (i1 in 1:(length(clique)-1)) {
+          for (i2 in (i1+1):length(clique)) {
+            var1 <- clique[i1]
+            var2 <- clique[i2]
+            conf <- 6
+            conf <- 6
+            if (var1 != 6 & var2 != 6) {
+              test.table <- apply(m_est$datainfo[[1]],c(var1,var2,conf),sum)
+              if(sum(test.table==0)) test.table <- test.table+1
+              parest <- log(epi.2by2(test.table,method="case.control")$massoc$OR.mh.wald[1,1])
+            } else {
+              test.table <- apply(m_est$datainfo[[1]],c(var1,var2),sum)
+              if(sum(test.table==0)) test.table <- test.table+1
+              parest <- log(oddsratio(test.table, method="fisher")$measure[2,1])
+            }
+            m_est.weiadj[clique[i1],clique[i2]] = parest
+            m_est.weiadj[clique[i2],clique[i1]] = parest
+          }
+        }
+      }
+    }
+    m1.weiadj <- m_est.weiadj[1:5,1:5]
+    estimates.graphical[i,] <- m1.weiadj[lower.tri(m1.weiadj)]
+
   }
   
 }
-est.value <- estimates[,2:11]
+
+est.value <- estimates.ising[,2:11]
+# est.value <- estimates.graphical[,2:11]
+
 x11(); hist(est.value)
 summary(as.vector(est.value))
 select <- !is.na(apply(est.value, 1, sum))
