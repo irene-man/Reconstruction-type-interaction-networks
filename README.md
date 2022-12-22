@@ -14,7 +14,7 @@ Python code for simulating multi-type pathogen dynamics and for sampling random 
 - IsingSampler
 - boot
 
-### Use of files under subdirectory `script`
+### Use of files under subdirectory `scripts`
 `parameter_sets_generation.py`: This script generates random parameter sets used by `equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`. 
 
 `equilibrium_simulation.py`, `equilibrium_simulation_assortative.py`, and `equilibrium_simulation_twice_connected.py`: These scripts simulate the equilibrium of multi-type dynamical systems corresponding to the inputted generated parameter set, using `infection_state.py`, and either `ode_model.py` or `ode_model_assortative.py`.
