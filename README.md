@@ -21,6 +21,8 @@ Python code for simulating multi-type pathogen dynamics and for sampling random 
 
 `validation_inference_performance.R`: This script validates the performance of statistical network inference.
 
+`inference_GEE.sas`: This script performs inference with Generalized Estimating Equations models (GEE).
+
 ### Authors
 Irene Man<sup>*,1,2</sup>, Elisa Benincà<sup>1</sup>, Mirjam E. Kretzschmar<sup>2</sup>, Johannes A. Bogaards<sup>1,3</sup>
 <table>
